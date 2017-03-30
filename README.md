@@ -1,7 +1,7 @@
 ## Jupyterhub with dummyauthenticator and set of ML libs (like tensorflow) for tests
 
 
-###Building
+### Building
 `
 docker build -t codeabovelab/jupyterhub .
 `
@@ -11,14 +11,14 @@ NB: image exists in dockerhub
 `
 docker pull codeabovelab/jupyterhub
 `
-###Running
+### Running
 `
 docker run -d -p 8754:8754 --name jupyterhub codeabovelab/jupyterhub
 `
 
 use admin with no password 
 
-###Testing
+### Testing
 
 `
 import tensorflow as tf
