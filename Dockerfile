@@ -65,7 +65,7 @@ ENV \
  TENSORFLOW_VERSION=1.0.1
 
 
-RUN conda install --yes -c conda-forge jupyterhub=0.6.1 \
+RUN conda install --yes -c conda-forge jupyterhub=0.7 \
   && conda install --yes -c conda-forge ipykernel=4.5.0 \
   && conda install --yes -c conda-forge notebook=4.2.3 \
   && conda install --yes -c conda-forge findspark=1.0.0 \
