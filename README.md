@@ -24,7 +24,7 @@ use admin with no password
 import tensorflow as tf
 hello = tf.Variable('Hello World!')
 sess = tf.Session()
-init = tf.initialize_all_variables()
+init = tf.global_variables_initializer()
 sess.run(init)
 sess.run(hello)
 ```
