@@ -65,19 +65,25 @@ ENV \
  TENSORFLOW_VERSION=1.0.1
 
 
-RUN conda install --yes -c conda-forge jupyterhub=0.6.1 \
-  && conda install --yes -c conda-forge ipykernel=4.5.0 \
-  && conda install --yes -c conda-forge notebook=4.2.3 \
-  && conda install --yes -c conda-forge findspark=1.0.0 \
+RUN \
+  conda install --yes -c conda-forge jupyterhub==0.7.2 \
+  && conda install --yes ipykernel==4.6.0 \
+  && conda install --yes notebook==5.0.0 \
   && conda install --yes -c conda-forge jupyter_contrib_nbextensions \
-  && conda install --yes -c conda-forge ipywidgets=6.0.0 \
-  && conda install --yes -c anaconda-nb-extensions anaconda-nb-extensions
+  && conda install --yes ipywidgets \
+  && conda install --yes -c anaconda-nb-extensions anaconda-nb-extensions \
+  && conda install --yes -c conda-forge findspark=1.0.0
 
+RUN \
+  pip install jupyterlab==0.19.0 \
+  && pip install jupyterlab_widgets==0.6.15 \
+  && pip install widgetslabextension==0.1.0
 
-RUN pip install jupyterlab \
+RUN \
+  jupyter labextension install --sys-prefix --py jupyterlab_widgets \
+  && jupyter labextension enable --sys-prefix --py jupyterlab_widgets \
   && jupyter serverextension enable --py jupyterlab --sys-prefix
 
-RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix
 
 # Install non-secure dummyauthenticator for jupyterhub (dev purposes only)
 RUN pip install jupyterhub-dummyauthenticator
