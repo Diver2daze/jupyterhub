@@ -90,6 +90,7 @@ RUN pip install jupyterhub-dummyauthenticator
 
 RUN pip install jupyterhub-simplespawner
 
+RUN pip install teradata
 
 RUN mkdir -p /root/tensorboard
 
@@ -97,7 +98,7 @@ RUN mkdir -p /root/models
 
 COPY config/ config/jupyterhub/
 
-RUN pip install tensorflow==1.0.1
+RUN pip install tensorflow==${TENSORFLOW_VERSION}
 
 EXPOSE 6006 8754
 
