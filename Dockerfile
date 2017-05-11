@@ -67,11 +67,11 @@ ENV \
 
 RUN \
   conda install --yes -c conda-forge jupyterhub==0.7.2 \
-  && conda install --yes ipykernel==4.6.0 \
+  && conda install --yes ipykernel==4.6.1 \
   && conda install --yes notebook==5.0.0 \
-  && conda install --yes -c conda-forge jupyter_contrib_nbextensions \
-  && conda install --yes ipywidgets \
-  && conda install --yes -c anaconda-nb-extensions anaconda-nb-extensions \
+  && conda install --yes -c conda-forge jupyter_contrib_nbextensions==0.2.7 \
+  && conda install --yes ipywidgets==6.0.0 \
+  && conda install --yes -c anaconda-nb-extensions anaconda-nb-extensions==1.0.0 \
   && conda install --yes -c conda-forge findspark=1.0.0
 
 RUN \
@@ -84,6 +84,13 @@ RUN \
   && jupyter labextension enable --sys-prefix --py jupyterlab_widgets \
   && jupyter serverextension enable --py jupyterlab --sys-prefix
 
+RUN \
+  jupyter nbextension install --py widgetsnbextension --sys-prefix \
+  && jupyter nbextension enable --py widgetsnbextension --sys-prefix
+
+RUN \
+  pip install ipysankeywidget \
+  && jupyter nbextension enable --py --sys-prefix ipysankeywidget
 
 # Install non-secure dummyauthenticator for jupyterhub (dev purposes only)
 RUN pip install jupyterhub-dummyauthenticator
