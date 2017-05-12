@@ -74,12 +74,16 @@ c.JupyterHub.answer_yes = True
 #   where `handler` is the calling web.RequestHandler,
 #   and `data` is the POST form data from the login page.
 #c.JupyterHub.authenticator_class = 'jupyterhub.auth.PAMAuthenticator'
-c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
+#c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
 #c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
+c.JupyterHub.authenticator_class = 'ldapauthenticator.LDAPAuthenticator'
 #c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 #c.GitHubOAuthenticator.client_id = os.environ['GITHUB_CLIENT_ID']
 #c.GitHubOAuthenticator.client_secret = os.environ['GITHUB_CLIENT_SECRET']
-
+c.LDAPAuthenticator.server_address = 'ldap'
+c.LDAPAuthenticator.use_ssl = False
+c.LDAPAuthenticator.server_port = 10389
+c.LDAPAuthenticator.bind_dn_template = 'uid={username},ou=system'
 # The base URL of the entire application
 c.JupyterHub.base_url = '/'
 

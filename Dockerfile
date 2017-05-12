@@ -99,7 +99,7 @@ RUN mkdir -p /root/models
 COPY config/ config/jupyterhub/
 
 RUN pip install tensorflow==${TENSORFLOW_VERSION}
-
+RUN pip install jupyterhub-ldapauthenticator
 EXPOSE 6006 8754
 
 COPY run run
