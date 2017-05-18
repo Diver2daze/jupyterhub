@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlab.prometeus.local'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.prometeus.local'
+    ports:
+      - '80:80'
+      - '443:443'
+      - '22:22'
+    volumes:
+      - '~/gitlab/config:/etc/gitlab'
+      - '~/gitlab/logs:/var/log/gitlab'
+      - '~/gitlab/data:/var/opt/gitlab'
+    networks:
+      net:
+        aliases:
+          - gitlab
+  jupyterhub:
+    image: 'codeabovelab/jupyterhub'
+    restart: always
+    ports: 
+      - '8765:8754'
+    volumes:
+      - '~/jupyterhub/config/jupyterhub_config.py:/root/config/jupyterhub/jupyterhub_config.py'
+    networks:
+      net:
+        aliases:
+          - jupyterhub
+  ldap:
+    image: 'h3nrik/apacheds'
+    restart: always
+    ports:
+      - '389:10389'
+    networks:
+      net:
+        aliases:
+          - ldap
+networks:
+  net:

@@ -49,7 +49,7 @@ import os
 # Grant admin users permission to access single-user servers.
 #
 # Users should be properly informed if this is enabled.
-c.JupyterHub.admin_access = True
+c.JupyterHub.admin_access = False
 
 # DEPRECATED, use Authenticator.admin_users instead.
 # c.JupyterHub.admin_users = set()
@@ -276,7 +276,7 @@ c.SimpleLocalProcessSpawner.home_path_template = '/root/'
 # Extra arguments to be passed to the single-user server
 c.Spawner.args = ['--allow-root']
 # The command used for starting notebooks.
-# c.Spawner.cmd = ['jupyterhub-singleuser']
+c.Spawner.cmd = ['jupyterhub-singleuser']
 
 # Enable debug-logging of the single-user server
 c.Spawner.debug = True
@@ -319,7 +319,7 @@ c.Spawner.ip = '0.0.0.0'
 #
 # `~` will be expanded to the user's home directory `%U` will be expanded to the
 # user's username
-c.Spawner.notebook_dir = 'notebooks'
+#c.Spawner.notebook_dir = '~/notebooks'
 
 # An HTML form for options a user can specify on launching their server. The
 # surrounding `<form>` element and the submit button are already provided.
@@ -374,7 +374,7 @@ c.Spawner.notebook_dir = 'notebooks'
 # set of usernames of admin users
 #
 # If unspecified, only the user that launches the server will be admin.
-#c.Authenticator.admin_users = {"root"}
+c.Authenticator.admin_users = {"root"}
 
 # Dictionary mapping authenticator usernames to JupyterHub users.
 #
@@ -421,11 +421,12 @@ c.Spawner.notebook_dir = 'notebooks'
 # adduser -q --gecos "" --home /customhome/river --disabled-password river
 #
 # when the user 'river' is created.
-#c.LocalAuthenticator.add_user_cmd = []
+c.LocalAuthenticator.add_user_cmd = ['adduser', '-q', '--gecos', '""', '--home', '/home/USERNAME', '--disabled-password']
+
 
 # If a user is added that doesn't exist on the system, should I try to create
 # the system user?
-c.LocalAuthenticator.create_system_users = False
+c.LocalAuthenticator.create_system_users = True
 
 # Automatically whitelist anyone in this group.
 #c.LocalAuthenticator.group_whitelist = set("root")
