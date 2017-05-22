@@ -35,7 +35,7 @@ services:
     image: 'h3nrik/apacheds'
     restart: always
     ports:
-      - '389:10389'
+      - '2406:10389'
     networks:
       net:
         aliases:
