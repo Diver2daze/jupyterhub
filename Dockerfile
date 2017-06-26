@@ -74,15 +74,9 @@ RUN \
   && conda install --yes -c anaconda-nb-extensions anaconda-nb-extensions==1.0.0 \
   && conda install --yes -c conda-forge findspark=1.0.0
 
-RUN \
-  pip install jupyterlab==0.19.0 \
-  && pip install jupyterlab_widgets==0.6.15 \
-  && pip install widgetslabextension==0.1.0
+RUN pip install jupyterlab==0.24.0
 
-RUN \
-  jupyter labextension install --sys-prefix --py jupyterlab_widgets \
-  && jupyter labextension enable --sys-prefix --py jupyterlab_widgets \
-  && jupyter serverextension enable --py jupyterlab --sys-prefix
+RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 
 RUN \
   jupyter nbextension install --py widgetsnbextension --sys-prefix \
